@@ -118,7 +118,7 @@ public partial class _Default : System.Web.UI.Page
     {
         //get link
         dropVideoValue = Convert.ToInt32(DropDownList2.SelectedValue);
-        Response.Write("hello" + dropVideoValue.ToString());
+       // Response.Write("hello" + dropVideoValue.ToString());
         string LinkQuery = "SELECT video_link FROM video where video_id =" + dropVideoValue.ToString() + ";";
 
         SqlDataAdapter da3 = new SqlDataAdapter(LinkQuery, conn);
@@ -127,9 +127,10 @@ public partial class _Default : System.Web.UI.Page
         if (ds3.Tables[0].Rows.Count > 0)
         {
             SingerName = DropDownList1.SelectedItem.Text;
-            youtubeLink = ds3.Tables[0].Rows[0][0].ToString();
+            youtubeLink = " http://www.youtube.com/embed/" + ds3.Tables[0].Rows[0][0].ToString();
+ 
             SongName = DropDownList2.SelectedItem.Text;
-            Response.Write(ds3.Tables[0].Rows[0][0]);
+          //  Response.Write(ds3.Tables[0].Rows[0][0]);
             //Response.End();
 
         }
