@@ -56,7 +56,7 @@ public partial class _Default : System.Web.UI.Page
             }
 
         }
-
+        /*
         if (DropDownList2.SelectedValue != "")
         {
             dropVideoValue = Convert.ToInt32(DropDownList2.SelectedValue);
@@ -66,28 +66,11 @@ public partial class _Default : System.Web.UI.Page
 
         if (dropVideoValue != 0)
         {
-            dropVideoValue = Convert.ToInt32(DropDownList2.SelectedValue);
-            Response.Write("hello"+dropVideoValue.ToString());
-            string LinkQuery = "SELECT video_link FROM video where video_id =" + dropVideoValue.ToString() + ";";
-
-            SqlDataAdapter da3 = new SqlDataAdapter(LinkQuery, conn);
-            DataSet ds3 = new DataSet();
-            da3.Fill(ds3);
-            if (ds3.Tables[0].Rows.Count > 0)
-            {
-               Response.Write( ds3.Tables[0].Rows[0][0]);
-               //Response.End();
-               
-            }
-            else
-            {
-                Response.Write("no data");
-                Response.End();
-
-            }
+            
 
 
         }
+         */
 
         if (DropDownList2.SelectedValue != "")
         {
@@ -96,49 +79,59 @@ public partial class _Default : System.Web.UI.Page
 
         }
 
-        if (dropSingerValue!= 0 && dropVideoValue ==0)
-        {
-
-            DropDownList2.Visible = true;
-            string videoQuery = "SELECT video_id,video_name FROM video where singer_id =" + dropSingerValue.ToString() + ";";
-
-            SqlDataAdapter da2 = new SqlDataAdapter(videoQuery, conn);
-            DataSet ds2 = new DataSet();
-            da2.Fill(ds2);
-            if (ds2.Tables[0].Rows.Count > 0)
-            {
-                ds2.Dispose(); DropDownList2.Items.Clear();
-                DropDownList2.DataSource = ds2;
-                DropDownList2.DataTextField = "video_name";
-                DropDownList2.DataValueField = "video_id";
-                DropDownList2.DataBind();
-                DropDownList2.Items.Insert(0, new ListItem("-- Select Video --", "0"));
-            }
-            else
-            {
-                Response.Write("no data"); 
-               // Response.End();
-
-            }
-        }
-
+       
        
 
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
-        
-      //  dropSingerValue =  Convert.ToInt32(DropDownList1.SelectedValue);
-     
+        //get song name and value
+        DropDownList2.Visible = true;
+        string videoQuery = "SELECT video_id,video_name FROM video where singer_id =" + dropSingerValue.ToString() + ";";
+
+        SqlDataAdapter da2 = new SqlDataAdapter(videoQuery, conn);
+        DataSet ds2 = new DataSet();
+        da2.Fill(ds2);
+        if (ds2.Tables[0].Rows.Count > 0)
+        {
+            ds2.Dispose(); DropDownList2.Items.Clear();
+            DropDownList2.DataSource = ds2;
+            DropDownList2.DataTextField = "video_name";
+            DropDownList2.DataValueField = "video_id";
+            DropDownList2.DataBind();
+            DropDownList2.Items.Insert(0, new ListItem("-- Select Video --", "0"));
+        }
+        else
+        {
+            Response.Write("no data");
+            // Response.End();
+
+        }
 
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-       value = Convert.ToInt32(DropDownList2.SelectedValue);
-       Response.Write("S2" + DropDownList2.SelectedValue.ToString());
-     //  Response.End();
+        //get link
+        dropVideoValue = Convert.ToInt32(DropDownList2.SelectedValue);
+        Response.Write("hello" + dropVideoValue.ToString());
+        string LinkQuery = "SELECT video_link FROM video where video_id =" + dropVideoValue.ToString() + ";";
+
+        SqlDataAdapter da3 = new SqlDataAdapter(LinkQuery, conn);
+        DataSet ds3 = new DataSet();
+        da3.Fill(ds3);
+        if (ds3.Tables[0].Rows.Count > 0)
+        {
+            Response.Write(ds3.Tables[0].Rows[0][0]);
+            //Response.End();
+
+        }
+        else
+        {
+            Response.Write("no data");
+            Response.End();
+
+        }
        
     }
 }
