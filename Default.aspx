@@ -70,14 +70,28 @@
 			</div>
 		</div>
 		<br>
+      
 			<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:s1021704ConnectionString %>" SelectCommand="SELECT [singer_name], [singer_id], [gender] FROM [singer]"></asp:SqlDataSource>
-			<div class="col-md-8">
-				<iframe width="630 " height="470" src="http://www.youtube.com/embed/qrO4YZeyl0I?autoplay=0">
+			<div class="col-md-7">
+				<iframe width="630 " height="470" src= <%= youtubeLink%>>
     			</iframe>
 			</div>
-			<div class="col-md-4">
-				<h2>Lady Gaga</h2> <br>
-				<h3>Song name</h3>
+			<div class="col-md-5">
+				<%--<h2> <%= SingerName%></h2> <br>
+				<h3>  <%= SongName%> </h3>--%>
+
+                <table class="table table-striped">
+                    <thead>
+                       <th><h2>Singer</h2></th>
+                       <th><h2>Song name</h2></th>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                    		<td> <h4><%= SingerName%></h4> </td>
+                    		<td> <h4> <%= SongName%></h4> </td>
+                    	</tr>
+                    </tbody>
+                </table>
 			</div>
 
 	</div>

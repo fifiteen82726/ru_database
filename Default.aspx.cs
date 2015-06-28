@@ -11,7 +11,9 @@ using System.Data.SqlClient;        // SqlDataAdapter
  
 public partial class _Default : System.Web.UI.Page
 {
-    public string youtubeLink = "";
+    public string youtubeLink ="http://www.youtube.com/embed/qrO4YZeyl0I";
+    public string SingerName = "Lady Gaga";
+    public string SongName = "Bad Romance";
     static int value = 0;
     string conn = "Server=140.138.154.29; Database=s1021704; User ID=sy; Password=1234; Trusted_Connection=False;";
     //宣告 資料庫命令 字串
@@ -95,6 +97,8 @@ public partial class _Default : System.Web.UI.Page
         da2.Fill(ds2);
         if (ds2.Tables[0].Rows.Count > 0)
         {
+            SingerName = DropDownList1.SelectedItem.Text;
+            SongName = "";
             ds2.Dispose(); DropDownList2.Items.Clear();
             DropDownList2.DataSource = ds2;
             DropDownList2.DataTextField = "video_name";
@@ -122,6 +126,9 @@ public partial class _Default : System.Web.UI.Page
         da3.Fill(ds3);
         if (ds3.Tables[0].Rows.Count > 0)
         {
+            SingerName = DropDownList1.SelectedItem.Text;
+            youtubeLink = ds3.Tables[0].Rows[0][0].ToString();
+            SongName = DropDownList2.SelectedItem.Text;
             Response.Write(ds3.Tables[0].Rows[0][0]);
             //Response.End();
 
